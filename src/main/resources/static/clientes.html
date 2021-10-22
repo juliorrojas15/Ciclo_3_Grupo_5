@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLIENTES</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="JS/clientes/listarCliente_script.js"></script>
+    <script src="JS/clientes/agregarCliente_script.js"></script>
+    <script src="JS/clientes/vaciarCliente_script.js"></script>
+    <script src="JS/clientes/borrarCliente_script.js"></script>
+    <script src="JS/clientes/editarCliente_script.js"></script>
+</head>
+<body>
+    <div>
+        <h1>BASE DE DATOS DE CLIENTES</h1>
+        <a href="javascript:history.back()"> VOLVER AL MENÚ</a>    
+    </div>
+    <hr>
+    <div>
+        <h2>Clientes inscritos en nuestra tienda</h2>
+        <button onclick="listarCliente()" id="btnListarCliente">LISTAR</button>    
+    </div>
+    <hr>
+    <div>
+        <input type="number" id="txtID" placeholder="Num ID">
+        <input type="text"   id="txtName" placeholder="Name">
+        <input type="text" id="txtEmail" placeholder="Email">
+        <input type="number" id="txtAge" placeholder="Age">
+        <button onclick="agregarCliente()" id="btnAgregarCliente">AGREGAR</button>
+        <button onclick="guardarEdicionCliente()" id="btnGuardarEdicionCliente" style="display: none;">GUARDAR EDICION</button>
+    </div>
+    <hr>
+    <div id="listadoClientes">
+
+    </div>
+    
+</body>
+</html>

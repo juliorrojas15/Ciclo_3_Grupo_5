@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMPUTADORES</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="JS/computadores/listarPC_script.js"></script>
+    <script src="JS/computadores/agregarPC_script.js"></script>
+    <script src="JS/computadores/vaciarPC_script.js"></script>
+    <script src="JS/computadores/borrarPC_script.js"></script>
+    <script src="JS/computadores/editarPC_script.js"></script>
+
+</head>
+<body>
+    <div>
+        <h1>BASE DE DATOS DE COMPUTADORES DISPONIBLES</h1>
+        <a href="javascript:history.back()"> VOLVER AL MENÚ</a>    
+    </div>
+    <hr>
+    <div>
+        <h2>Computadores disponibles en la tienda</h2>
+        <button onclick="listarPC()" id="btnListar">LISTAR</button>    
+    </div>
+    <hr>
+    <div>
+        <input type="number" id="txtID" placeholder="Num ID">
+        <input type="text"   id="txtBrand" placeholder="Brand">
+        <input type="number" id="txtModel" placeholder="Model">
+        <input type="number" id="txtCategory_ID" placeholder="Category_ID">
+        <input type="text" id="txtName" placeholder="Name">
+        <button onclick="agregarPC()" id="btnAgregarPC">AGREGAR</button>
+        <button onclick="guardarEdicionPC()" id="btnGuardarEdicionPC" style="display: none;">GUARDAR EDICION</button>
+    </div>
+    <hr>
+    <div id="listadoComputadores">
+
+    </div>
+</body>
+</html>
