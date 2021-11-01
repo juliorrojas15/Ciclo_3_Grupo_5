@@ -5,8 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CATEGORIA</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="JS/CategoryScript.js"></script>
 </head>
 <body>
-    
+    <div>
+        <h1>BASE DE DATOS DE CATEGORÍAS</h1>
+        
+        <a href="javascript:history.back()"> VOLVER AL MENÚ</a>    
+    </div>
+    <hr>
+    <div>
+        <h3>Creación de categoria</h3>
+        <input type="text"   id="txtName" placeholder="Name" maxlength="45">
+        <br><input type="text" id="txtDescription" placeholder="Description" maxlength="250">
+        <br><button onclick="agregarCategory()" id="btnAgregarCategory">AGREGAR</button>
+        <br><button onclick="guardarEdicionCategory()" id="btnGuardarEdicionCategory" style="display: none;">GUARDAR EDICION</button>
+    </div>
+    <hr>
+    <h2>Categorías disponibles en la tienda</h2>
+    <div id="listadoCategory">
+    <script>
+        window.onload=function(){
+            listarCategory();
+        }
+    </script>
+    </div>
 </body>
 </html>

@@ -16,7 +16,7 @@ public class Message implements Serializable {
     private Integer idMessage;
     private String messageText;
 
-    //############################################################## Realiciones entidades
+    //############################################################## Relaición entidades
     @ManyToOne
     @JoinColumn (name = "computer")
     @JsonIgnoreProperties({"messages","reservations"})

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMPUTADORES</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="JS/ComputerScript.js"></script>
+</head>
+<body>
+    <div>
+        <h1>BASE DE DATOS DE COMPUTADORES DISPONIBLES</h1>
+        
+        <a href="javascript:history.back()"> VOLVER AL MENÚ</a>    
+    </div>
+    <hr>
+    <div>
+        <h3>Creación de computador</h3>
+        <input type="text"   id="txtBrand" placeholder="Brand" maxlength="45">
+        <br><input type="number" id="txtYear" placeholder="Year" min= "1" max="9999" maxlength="4"
+            onkeyup="if(parseInt(this.value)>9999){ this.value = ''; return false; }">
+        <br><input type="text" id="txtName" placeholder="Name" maxlength="45">
+        <br><input type="text" id="txtDescription" placeholder="Description" maxlength="250">
+        <br><form> Categoria: <div id="listadoCategorias"></div></form>
+        <br><button onclick="agregarPC()" id="btnAgregarPC">AGREGAR</button>
+        <br><button onclick="guardarEdicionPC()" id="btnGuardarEdicionPC" style="display: none;">GUARDAR EDICION</button>
+    </div>
+    <hr>
+    <h2>Computadores disponibles en la tienda</h2>
+    <div id="listadoComputadores">
+    <script>
+        window.onload=function(){
+            listarPC();
+            listarCategorias();
+        }
+    </script>
+    </div>
+</body>
+</html>

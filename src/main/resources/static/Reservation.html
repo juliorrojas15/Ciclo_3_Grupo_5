@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESERVAS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="JS/ReservationScript.js"></script>
+</head>
+<body>
+    <div>
+        <h1>RESERVAR COMPUTADORES</h1>
+        
+        <a href="javascript:history.back()"> VOLVER AL MENÚ</a>    
+    </div>
+    <hr>
+    <div>
+        <h3>Crea tu reserva</h3>
+        <input type="date"   id="txtStartDate" placeholder="Start Date yyyy-mm-dd">
+        <input type="date"   id="txtDevolutionDate" placeholder="Devolution Date yyyy-mm-dd">
+        <br>
+        <br><form> Cliente: <div id="listadoClient"></div></form>
+        <br><form> Computador: <div id="listadoComputer"></div></form>
+        <br><button onclick="agregarReservation()" id="btnAgregarReservation">AGREGAR</button>
+        <br><button onclick="guardarEdicionReservation()" id="btnGuardarEdicionReservation" style="display: none;">GUARDAR EDICION</button>
+    </div>
+    <hr>
+    <h2>Reservas hechas en la tienda</h2>
+    <div id="listadoReservation">
+    <script>
+        window.onload=function(){
+            listarReservation();
+            listarClient();
+            listarComputer();
+        }
+    </script>
+    </div>
+</body>
+</html>

@@ -9,7 +9,7 @@ import co.usa.reto.reto.model.Admin;
 import co.usa.reto.reto.service.AdminService;
 
 @RestController
-@RequestMapping("/api/Admin")
+@RequestMapping("/api/Administrator")
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, 
                                         RequestMethod.DELETE, RequestMethod.PUT })
 public class AdminController {

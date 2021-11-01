@@ -1,0 +1,91 @@
+######################################################################
+Pasos para hacer el Repositorio  del PC al GitHub:
+######################################################################
+-Crear el repositorio
+-Clic Derecho en GitBash here en la carpeta raiz del proyecto
+-git init
+-git remote add origin + <link>
+-git status (archivos en rojo)
+-git add --all
+-git status (archivos en verde)
+-git commit -m "comentario de la versión"
+-git push -u origin master
+-Talvez pide clave, abrir en browser y login
+-Ver repositorio
+-exit
+
+######################################################################
+pasos para crear la máquina virtual
+######################################################################
+-Ingresar a oracle cloud
+-Menu->Recursos informáticos->instancias
+-Crear máquina virtual
+-guardar llave privada y publica (cambiar nombres)
+-Guardar
+-Esperar a Ejecución  (verde)
+-abrir subred en VNIC primario
+-Seleccionar la lista de segurdad creada
+-Editar o crear una regla con origen 0.0.0.0/0 y ningun pueto de origen y destino
+-Guardar y asegurar que puerto origen sea Todo y puerto destino Todo
+-Volver a instancias
+-Tener en cuenta la dirección IP
+
+######################################################################
+Pasos para configurar la máquina virtual
+######################################################################
+-ir a la carpeta de las llaves
+-click derecho y Git bash
+-shh -i llave-privada.key opc@129.151.122.73
+-yes
+-si aparece [opc@nombreMaquina -]$ ... todo ok
+-sudo yum update
+-esperar
+-y (yes)
+-esperar
+-instalar git --> sudo yum install git
+-esperar
+-y (yes)
+-esperar
+-verificar versión git -->git --version
+-instalar java --> sudo yum install java-11-openjdk-devel
+-esperar
+-y (yes)
+-esperar
+-verificar versión java --> java --version
+-instalar java -->
+   sudo yum-config-manager --add-repo http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo
+-esperar
+-sudo yum-config-manager --enable epel-apache-maven
+-esperar
+-sudo yum install -y apache-maven
+-esperar
+-Modificar de nuevo versión de java
+-sudo alternatives --config java
+-Seleccionar opción de java 11
+-sudo alternatives --config javac
+-Seleccionar opción de java 11
+
+######################################################################
+Pasos para hacer el Repositorio  del GitHub a la máquina virtual:
+######################################################################
+-ir a repositorio y copiar el link de la última versión
+-ir a la carpeta de las llaves
+-click derecho y GitBash here
+-shh -i llave-privada.key opc@129.151.122.73
+-ls
+-git clone https://github.com/juliorrojas15/Ciclo_3_Grupo_5.git
+- si está en un branch
+ git clone --branch master https://github.com/juliorrojas15/Ciclo_3_Grupo_5.git
+-ls y cd para ingresar a la carpeta donde está el "src"
+-mvn clean package -DskipTests
+-Esperar
+-ls
+-cd target
+-sudo java -jar <archivo.jar>
+-Esperar
+-interrumpir con ctrl + c
+-sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent
+-sudo firewall-cmd --reload
+-final... realizar pruebas postman
+
+

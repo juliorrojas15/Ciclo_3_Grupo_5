@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLIENTES</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="JS/ClientScript.js"></script>
+</head>
+<body>
+    <div>
+        <h1>BASE DE DATOS DE CLIENTES</h1>
+        
+        <a href="javascript:history.back()"> VOLVER AL MENÚ</a>    
+    </div>
+    <hr>
+    <div>
+        <h3>Creación de cliente</h3>
+        <input type="text" id="txtName" placeholder="Name" maxlength="250">
+        <br><input type="email" id="txtEmail" placeholder="email" maxlength="45">
+        <br><input type="password" id="txtPassword" placeholder="password" maxlength="45">
+        <br><input type="number" id="txtAge" placeholder="Age" min= "1" max="99" maxlength="2"
+            onkeyup="if(parseInt(this.value)>99){ this.value = ''; return false; }">
+        <br><button onclick="agregarClient()" id="btnAgregarClient">AGREGAR</button>
+        <br><button onclick="guardarEdicionClient()" id="btnGuardarEdicionClient" style="display: none;">GUARDAR EDICION</button>
+    </div>
+    <hr>
+    <h2>Clientes registrados en la tienda</h2>
+    <div id="listadoClient">
+    <script>
+        window.onload=function(){
+            listarClient();
+        }
+    </script>
+    </div>
+</body>
+</html>

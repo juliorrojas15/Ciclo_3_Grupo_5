@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MENSAJES</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="JS/MessageScript.js"></script>
+</head>
+<body>
+    <div>
+        <h1>REGISTRAR MENSAJE DE COMPUTADORES</h1>
+        
+        <a href="javascript:history.back()"> VOLVER AL MENÚ</a>    
+    </div>
+    <hr>
+    <div>
+        <h3>Crea tu mensaje</h3>
+        <input type="text"   id="txtMessage" placeholder="Message" maxlength="250">
+        <br><form> Cliente: <div id="listadoClient"></div></form>
+        <br><form> Computador: <div id="listadoComputer"></div></form>
+        <br><button onclick="agregarMessage()" id="btnAgregarMessage">AGREGAR</button>
+        <br><button onclick="guardarEdicionMessage()" id="btnGuardarEdicionMessage" style="display: none;">GUARDAR EDICION</button>
+    </div>
+    <hr>
+    <h2>Mensajes Registrados en la tienda</h2>
+    <div id="listadoMessage">
+    <script>
+        window.onload=function(){
+            listarMessage();
+            listarClient();
+            listarComputer();
+        }
+    </script>
+    </div>
+</body>
+</html>

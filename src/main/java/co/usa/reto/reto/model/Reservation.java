@@ -5,10 +5,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.annotation.JacksonInject.Value;
 
 @Entity
 @Table(name="reservation")

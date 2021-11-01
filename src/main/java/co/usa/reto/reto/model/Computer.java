@@ -46,7 +46,7 @@ public class Computer  implements Serializable {
     private String description;
 
 
-    //############################################################## Realiciones entidades
+    //############################################################## Relaición entidades
 
     /**
      * Relación de tabla Category Muchos a uno

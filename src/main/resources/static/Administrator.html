@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMINISTRADORES</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="JS/AdministratorScript.js"></script>
+</head>
+<body>
+    <div>
+        <h1>BASE DE DATOS DE ADMINISTRADORES</h1>
+        
+        <a href="javascript:history.back()"> VOLVER AL MENÚ</a>    
+    </div>
+    <hr>
+    <div>
+        <h3>Creación de administrador</h3>
+        <input type="text" id="txtName" placeholder="Name" maxlength="250">
+        <br><input type="email" id="txtEmail" placeholder="email" maxlength="45">
+        <br><input type="password" id="txtPassword" placeholder="password" maxlength="45">
+        <br><button onclick="agregarAdministrator()" id="btnAgregarAdministrator">AGREGAR</button>
+        <br><button onclick="guardarEdicionAdministrator()" id="btnGuardarEdicionAdministrator" style="display: none;">GUARDAR EDICION</button>
+    </div>
+    <hr>
+    <h2>Administradores registrados en la tienda</h2>
+    <div id="listadoAdministrator">
+    <script>
+        window.onload=function(){
+            listarAdministrator();
+        }
+    </script>
+    </div>
+</body>
+</html>
