@@ -49,10 +49,10 @@ public class MessageService {
                 if (message.getMessageText() != null){
                     consulta.get().setMessageText(message.getMessageText());
                 }
-                if (message.getClient().getIdClient() != null){
+                if (message.getClient() != null){
                     consulta.get().setClient(message.getClient());
                 }    
-                if (message.getComputer().getId() != null){
+                if (message.getComputer() != null){
                     consulta.get().setComputer(message.getComputer());
                 }              
                 return messageRepositorio.save(consulta.get());

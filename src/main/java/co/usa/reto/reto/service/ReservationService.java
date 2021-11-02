@@ -1,27 +1,50 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package co.usa.reto.reto.service;
-
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import co.usa.reto.reto.model.Reservation;
 import co.usa.reto.reto.repository.ReservationRepositorio;
 
+/**
+ *  Reservation Service
+ */
 @Service
 public class ReservationService {
+    
+    /**
+     * Repositorio principal
+     */
     @Autowired
     private ReservationRepositorio reservationRepositorio;
 
+    /**
+     * Get All
+     * @return
+     */
     public List<Reservation> getAll(){
         return reservationRepositorio.getAll();
     }
 
+    /**
+     * getReservation
+     * @param Id
+     * @return
+     */
     public Optional<Reservation> getReservation(int Id){
         return reservationRepositorio.getReservation(Id);
     }
 
+    /**
+     * save
+     * @param reservation
+     * @return
+     */
     public Reservation save (Reservation reservation){
         //Verificar si el objeto es nuevo, de ser así guardar
 
@@ -40,6 +63,12 @@ public class ReservationService {
 
         }
     }
+
+    /**
+     * update
+     * @param reservation
+     * @return
+     */
     public Reservation update (Reservation reservation){
         
         //Verificar si se ingresó un número de ID
@@ -62,6 +91,11 @@ public class ReservationService {
         return reservation;
     }
 
+    /**
+     * deleteReservation
+     * @param numId
+     * @return
+     */
     public boolean deleteReservation (int numId){
         Optional<Reservation> consulta = reservationRepositorio.getReservation(numId);
         if (!consulta.isEmpty()){

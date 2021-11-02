@@ -53,7 +53,7 @@ public class ComputerService {
                 if (computer.getYear() != null){
                     consulta.get().setYear(computer.getYear());
                 }
-                if (computer.getCategory().getId() != null){
+                if (computer.getCategory() != null){
                     consulta.get().setCategory(computer.getCategory());
                 }
                 if (computer.getName() != null){
