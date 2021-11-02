@@ -39,4 +39,34 @@ public class AdminService {
 
         }
     }
+
+    public Admin update (Admin admin){
+        
+        //Verificar si se ingresó un número de ID
+        if (admin.getIdAdmin() != null){
+            Optional<Admin> consulta = adminRepositorio.getAdmin(admin.getIdAdmin());
+            if (!consulta.isEmpty()){
+                if (admin.getName() != null){
+                    consulta.get().setName(admin.getName());
+                }
+                if (admin.getEmail() != null){
+                    consulta.get().setEmail(admin.getEmail());
+                }
+                if (admin.getPassword() != null){
+                    consulta.get().setPassword (admin.getPassword());
+                }
+                return adminRepositorio.save(consulta.get());
+            } 
+        }
+        return admin;
+    }
+
+    public boolean deleteAdmin (int numId){
+        Optional<Admin> consulta = adminRepositorio.getAdmin(numId);
+        if (!consulta.isEmpty()){
+            adminRepositorio.delete(consulta.get());
+            return true;
+        }
+        return false;
+    }
 }

@@ -9,7 +9,7 @@ import co.usa.reto.reto.model.Admin;
 import co.usa.reto.reto.service.AdminService;
 
 @RestController
-@RequestMapping("/api/Administrator")
+@RequestMapping("/api/Admin")
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, 
                                         RequestMethod.DELETE, RequestMethod.PUT })
 public class AdminController {
@@ -31,4 +31,16 @@ public class AdminController {
     public Admin save(@RequestBody Admin admin){
         return adminService.save(admin);
     } 
+
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Admin update(@RequestBody Admin admin){
+        return adminService.update(admin);
+    }
+
+    @DeleteMapping("/{numId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean deleteAdmin(@PathVariable("numId") int numId){
+        return adminService.deleteAdmin(numId);
+    }
 }

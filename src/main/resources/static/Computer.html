@@ -23,15 +23,16 @@
         <br><input type="text" id="txtName" placeholder="Name" maxlength="45">
         <br><input type="text" id="txtDescription" placeholder="Description" maxlength="250">
         <br><form> Categoria: <div id="listadoCategorias"></div></form>
-        <br><button onclick="agregarPC()" id="btnAgregarPC">AGREGAR</button>
-        <br><button onclick="guardarEdicionPC()" id="btnGuardarEdicionPC" style="display: none;">GUARDAR EDICION</button>
+        <br><button onclick="agregarComputer()" id="btnAgregarComputer">AGREGAR</button>
+        <br><button onclick="guardarEdicionComputer()" id="btnGuardarEdicionComputer" style="display: none;">GUARDAR EDICION</button>
     </div>
     <hr>
     <h2>Computadores disponibles en la tienda</h2>
+    <h5>Si deseas eliminar un computador no debe tener reservaciones ni mensajes activos</h5>
     <div id="listadoComputadores">
     <script>
         window.onload=function(){
-            listarPC();
+            listarComputer();
             listarCategorias();
         }
     </script>

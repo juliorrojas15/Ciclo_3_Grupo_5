@@ -19,11 +19,13 @@
         <h3>Creación de categoria</h3>
         <input type="text"   id="txtName" placeholder="Name" maxlength="45">
         <br><input type="text" id="txtDescription" placeholder="Description" maxlength="250">
+        <br>
         <br><button onclick="agregarCategory()" id="btnAgregarCategory">AGREGAR</button>
         <br><button onclick="guardarEdicionCategory()" id="btnGuardarEdicionCategory" style="display: none;">GUARDAR EDICION</button>
     </div>
     <hr>
     <h2>Categorías disponibles en la tienda</h2>
+    <h5>Si deseas eliminar una categoría no deben tener computadores relacionados</h5>
     <div id="listadoCategory">
     <script>
         window.onload=function(){

@@ -39,5 +39,35 @@ public class MessageService {
 
         }
     }
+
+    public Message update (Message message){
+        
+        //Verificar si se ingresó un número de ID
+        if (message.getIdMessage() != null){
+            Optional<Message> consulta = messageRepositorio.getMessage(message.getIdMessage());
+            if (!consulta.isEmpty()){
+                if (message.getMessageText() != null){
+                    consulta.get().setMessageText(message.getMessageText());
+                }
+                if (message.getClient().getIdClient() != null){
+                    consulta.get().setClient(message.getClient());
+                }    
+                if (message.getComputer().getId() != null){
+                    consulta.get().setComputer(message.getComputer());
+                }              
+                return messageRepositorio.save(consulta.get());
+            } 
+        }
+        return message;
+    }
+
+    public boolean deleteMessage (int numId){
+        Optional<Message> consulta = messageRepositorio.getMessage(numId);
+        if (!consulta.isEmpty()){
+            messageRepositorio.delete(consulta.get());
+            return true;
+        }
+        return false;
+    }
 }
 

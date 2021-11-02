@@ -40,5 +40,35 @@ public class ReservationService {
 
         }
     }
+    public Reservation update (Reservation reservation){
+        
+        //Verificar si se ingresó un número de ID
+        if (reservation.getIdReservation() != null){
+            Optional<Reservation> consulta = reservationRepositorio.getReservation(reservation.getIdReservation());
+            if (!consulta.isEmpty()){
+                if (reservation.getStartDate() != null){
+                    consulta.get().setStartDate(reservation.getStartDate());
+                }
+                if (reservation.getDevolutionDate() != null){
+                    consulta.get().setDevolutionDate(reservation.getDevolutionDate());
+                }
+                if (reservation.getStatus() != null){
+                    consulta.get().setStatus(reservation.getStatus());
+                }
+                
+                return reservationRepositorio.save(consulta.get());
+            } 
+        }
+        return reservation;
+    }
+
+    public boolean deleteReservation (int numId){
+        Optional<Reservation> consulta = reservationRepositorio.getReservation(numId);
+        if (!consulta.isEmpty()){
+            reservationRepositorio.delete(consulta.get());
+            return true;
+        }
+        return false;
+    }
 }
 

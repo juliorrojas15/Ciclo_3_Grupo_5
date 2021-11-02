@@ -31,6 +31,7 @@ function listarRespuestaReservation(items){
                         <th>Computer</th>
                         <th>Client</th>
                         <th>Score</th>
+                        <th clspan="2">Acciones</th> 
                     </tr>`;
     
     for(var i=0;i<items.length;i++){
@@ -49,12 +50,14 @@ function listarRespuestaReservation(items){
 
         tblTabla+=`<tr>
                         <td>${items[i].idReservation}</td>
-                        <td>${startDate.toLocaleDateString()}</td>
-                        <td>${devolutionDate.toLocaleDateString()}</td>
+                        <td>${startDate.toLocaleDateString()+1}</td>
+                        <td>${devolutionDate.toLocaleDateString()+1}</td>
                         <td>${items[i].status}</td>
                         <td>${items[i].computer.brand} - ${items[i].computer.name} - ${items[i].computer.year}</td>
                         <td>${items[i].client.idClient} - ${items[i].client.name} - ${items[i].client.email}</td>
                         <td>${score}</td>
+                        <td><button onclick="getRegistroReservation(${items[i].idReservation})">EDITAR</td>
+                        <td><button onclick="borrarReservation(${items[i].idReservation})">BORRAR</td>
                     </tr>
         `;
     }
@@ -94,6 +97,7 @@ function listarRespuestaClient(items){
 
     console.log(listClient);
     $("#listadoClient").html(listClient);
+    
 }
 //##################################################################################################
 //##################            LISTAR COMPUTADORES EN LISTA DESPLEGABLE        ####################
@@ -143,6 +147,15 @@ function agregarReservation(){
 
     var idSelectedClient = $("#selectClient").val();
     var idSelectedComputer = $("#selectComputer").val();
+    
+    if(idSelectedClient == null){
+        window.alert("Falta seleccionar un cliente");
+        return;
+    }
+    if(idSelectedComputer == null){
+        window.alert("Falta seleccionar un Computador");
+        return;
+    }
 
    //Camputar datos del FrontEnd a una variable de tipo diccionario
     var datos = {
@@ -184,6 +197,101 @@ function vaciarReservation(){
     
     $("#txtStartDate").val("");
     $("#txtDevolutionDate").val("");
+    $("#selectClient").val("");
+    $("#selectComputer").val("");
     $("#btnAgregarReservation").show();
     $("#btnGuardarEdicionReservation").hide();
+}
+
+//##################################################################################################
+//#################################            BORRAR CATEGORÍA                 ####################
+//##################################################################################################
+function borrarReservation(numID){
+
+    //Camputar datos del FrontEnd a una variable de tipo diccionario
+    var datos = {
+        id:numID
+    }
+
+        //Convertir lo que ingresemos en el FrontEnd a JSON
+    let datosPeticion = JSON.stringify(datos);
+
+    $.ajax({
+        url:urlGeneral+"api/Reservation/"+numID,
+        data: datosPeticion,
+        type:'DELETE',
+        contentType:"application/JSON",
+
+        success:function(respuesta){
+            console.log("Borrado");
+            listarReservation();
+        },
+        error:function(xhr,status){
+            console.log(status);
+        }
+    });
+}
+
+//##################################################################################################
+//#################################            EDITAR                           ####################
+//##################################################################################################
+
+var idSelected;
+function getRegistroReservation(numID){
+
+    idSelected = numID;
+    $.ajax({
+       url:urlGeneral+"api/Reservation/"+numID,
+       type:'GET',
+       dataType:"JSON",
+
+       success:function(respuesta){
+           console.log(respuesta);
+           var startDate = new Date(respuesta.startDate);
+           var devolutionDate = new Date(respuesta.devolutionDate);
+           
+           $("#txtStartDate").val(startDate.toLocaleDateString()+1);
+           $("#txtDevolutionDate").val(devolutionDate.toLocaleDateString()+1);
+           $("#selectClient").hide();//.val(respuesta.client.idClient);
+           $("#selectComputer").hide();//.val(respuesta.computer.id);
+           $("#btnAgregarReservation").hide();
+           $("#btnGuardarEdicionReservation").show();
+       },
+       error:function(xhr,status){
+           console.log(status);
+       }
+   });
+
+}
+
+function guardarEdicionReservation(){
+       //Camputar datos del FrontEnd a una variable de tipo diccionario
+       var datos = {
+           idReservation:idSelected,
+           startDate:$("#txtStartDate").val(),
+           devolutionDate:$("#txtDevolutionDate").val(),
+           client:{idClient: $("#selectClient").val()},
+           computer:{id: $("#selectComputer").val()}
+        }
+       
+       //Convertir lo que ingresemos en el FrontEnd a JSON
+       let datosPeticion = JSON.stringify(datos);
+       console.log(datosPeticion);
+       $.ajax({
+           url:urlGeneral+"api/Reservation/update",
+           data: datosPeticion,
+           type:'PUT',
+           contentType:"application/JSON",
+
+           success:function(respuesta){
+               console.log("Editado");
+               $("#selectClient").show();
+               $("#selectComputer").show();
+               listarReservation();
+               vaciarReservation();
+           },
+           error:function(xhr,status){
+               console.log(status);
+           }
+       });
 }

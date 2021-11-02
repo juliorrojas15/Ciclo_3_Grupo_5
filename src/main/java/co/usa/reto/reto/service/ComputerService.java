@@ -40,4 +40,41 @@ public class ComputerService {
 
         }
     }
+
+    public Computer update (Computer computer){
+        
+        //Verificar si se ingresó un número de ID
+        if (computer.getId() != null){
+            Optional<Computer> consulta = computerRepositorio.getComputer(computer.getId());
+            if (!consulta.isEmpty()){
+                if (computer.getBrand() != null){
+                    consulta.get().setBrand(computer.getBrand());
+                }
+                if (computer.getYear() != null){
+                    consulta.get().setYear(computer.getYear());
+                }
+                if (computer.getCategory().getId() != null){
+                    consulta.get().setCategory(computer.getCategory());
+                }
+                if (computer.getName() != null){
+                    consulta.get().setName(computer.getName());
+                }
+                if (computer.getDescription() != null){
+                    consulta.get().setDescripcion(computer.getDescription());
+                }
+                
+                return computerRepositorio.save(consulta.get());
+            } 
+        }
+        return computer;
+    }
+
+    public boolean deleteComputer (int numId){
+        Optional<Computer> consulta = computerRepositorio.getComputer(numId);
+        if (!consulta.isEmpty()){
+            computerRepositorio.delete(consulta.get());
+            return true;
+        }
+        return false;
+    }
 }

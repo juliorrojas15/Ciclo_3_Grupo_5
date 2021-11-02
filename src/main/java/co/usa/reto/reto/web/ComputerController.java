@@ -32,4 +32,16 @@ public class ComputerController {
     public Computer save(@RequestBody Computer computer){
         return computerService.save(computer);
     }   
+
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Computer update(@RequestBody Computer computer){
+        return computerService.update(computer);
+    }
+
+    @DeleteMapping("/{numId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean deleteComputer(@PathVariable("numId") int numId){
+        return computerService.deleteComputer(numId);
+    }
 }

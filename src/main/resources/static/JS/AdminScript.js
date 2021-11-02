@@ -4,88 +4,51 @@ var urlGeneral = "http://localhost:8080/";
 //##################            LISTAR CATEGORÍAS EN TABLA                      ####################
 //##################################################################################################
 
-function listarClient(){
+function listarAdmin(){
     $.ajax({
-        url:urlGeneral+"api/Client/all",
+        url:urlGeneral+"api/Admin/all",
         type:'GET',
         dataType:"JSON",
 
         success:function(respuesta){
             console.log(respuesta);
-            listarRespuestaClient(respuesta);
+            listarRespuestaAdmin(respuesta);
         },
         error:function(xhr,status){
             console.log(status);
         }
     });
 }
-function listarRespuestaClient(items){
+function listarRespuestaAdmin(items){
     var tblTabla = `<table border="1">
                     <tr>
                         <th>Name</th>
                         <th>email</th>
-                        <th>edad</th>
-                        <th>reservaciones activas</th>
-                        <th>mensajes activos</th>
                         <th clspan="2">Acciones</th> 
                     </tr>`;
-    
-    var listReservations="";
-    var listMessages="";
-    var mostrarBorrar="";
     for(var i=0;i<items.length;i++){
-        //No se puede eliminar si hay relación con una reservación
-        for(var j=0;j<items[i].reservations.length;j++){
-            //Reunir las reservaciones en una sola casilla
-            if (items[i].reservations[j].status == "created"){
-                var startDate = new Date(items[i].reservations[j].startDate);
-                var devolutionDate = new Date(items[i].reservations[j].devolutionDate);
-
-                listReservations+=(j+1) + ") " + (startDate.toLocaleDateString()+1)
-                    + " - " + (devolutionDate.toLocaleDateString()+1) + "<br>";    
-            }
-        }
-
-        //No se puede eliminar si hay relación con un mensaje
-        for(var j=0;j<items[i].messages.length;j++){
-            //Reunir los Mensajes en una sola casilla
-            listMessages+=(j+1) + ") " + items[i].messages[j].messageText + "<br>";    
-        }
-
-        //Si hay relaciones con mensajes o con reservaciones no se puede borrar
-        if (listReservations.length>=1 || listMessages.length >= 1){
-            mostrarBorrar = `style="display: none"`;
-        }
-        else{
-            mostrarBorrar = "";
-        }
         tblTabla+=`<tr>
                         <td>${items[i].name}</td>
                         <td>${items[i].email}</td>
-                        <td>${items[i].age}</td>
-                        <td>${listReservations}</td>
-                        <td>${listMessages}</td>
-                        <td><button onclick="getRegistroClient(${items[i].idClient})">EDITAR</td>
-                        <td><button onclick="borrarClient(${items[i].idClient}) " ${mostrarBorrar}>BORRAR</td>
+                        <td><button onclick="getRegistroAdmin(${items[i].idAdmin})">EDITAR</td>
+                        <td><button onclick="borrarAdmin(${items[i].idAdmin})">BORRAR</td>
                     </tr>
         `;
-        listReservations="";
-        listMessages="";
     }
     tblTabla+=`</table>`;
-    
-    $("#listadoClient").html(tblTabla);
+
+    $("#listadoAdmin").html(tblTabla);
 
 }
 
 //##################################################################################################
-//#################################            CREAR CLIENTE                    ####################
+//#################################            CREAR ADMINISTRATOR              ####################
 //##################################################################################################
-function agregarClient(){
+function agregarAdmin(){
 
     //Condiciones de llenado
-    if($("#txtName").val() == "" || $("#txtEmail").val() == "" ||
-        $("#txtPassword").val() == "" || $("#txtAge").val() == ""){
+    if($("#txtName").length < 1 || $("#txtEmail").length < 1 ||
+        $("#txtPassword").length < 1){
             window.alert("Faltan campos por llenar");
             return;
     }
@@ -94,8 +57,7 @@ function agregarClient(){
     var datos = {
         name:$("#txtName").val(),
         email:$("#txtEmail").val(),
-        password:$("#txtPassword").val(),
-        age:$("#txtAge").val()
+        password:$("#txtPassword").val()
     }
     
     //Convertir lo que ingresemos en el FrontEnd a JSON
@@ -104,15 +66,15 @@ function agregarClient(){
     console.log(datosPeticion);
 
         $.ajax({
-            url:urlGeneral+"api/Client/save",
+            url:urlGeneral+"api/Admin/save",
             data: datosPeticion,
             type:'POST',
             contentType:"application/JSON",
 
             success:function(respuesta){
                 console.log("insertado");
-                listarClient();
-                vaciarClient();
+                listarAdmin();
+                vaciarAdmin();
             },
             error:function(xhr,status){
                 console.log(status);
@@ -124,19 +86,18 @@ function agregarClient(){
 //##################################################################################################
 //#################################            VACÍAR FORMULARIO                ####################
 //##################################################################################################
-function vaciarClient(){
+function vaciarAdmin(){
     $("#txtName").val("");
     $("#txtEmail").val("");
     $("#txtPassword").val("");
-    $("#txtAge").val("");
-    $("#btnAgregarClient").show();
-    $("#btnGuardarEdicionClient").hide();
+    $("#btnAgregarAdmin").show();
+    $("#btnGuardarEdicionAdmin").hide();
 }
 
 //##################################################################################################
-//#################################            BORRAR CLIENTE                   ####################
+//#################################            BORRAR ADMINISTRADOR             ####################
 //##################################################################################################
-function borrarClient(numID){
+function borrarAdmin(numID){
 
     //Camputar datos del FrontEnd a una variable de tipo diccionario
     var datos = {
@@ -147,45 +108,41 @@ function borrarClient(numID){
     let datosPeticion = JSON.stringify(datos);
 
     $.ajax({
-        url:urlGeneral+"api/Client/"+numID,
+        url:urlGeneral+"api/Admin/"+numID,
         data: datosPeticion,
         type:'DELETE',
         contentType:"application/JSON",
 
         success:function(respuesta){
             console.log("Borrado");
-            listarClient();
+            listarAdmin();
         },
         error:function(xhr,status){
             console.log(status);
         }
     });
-
 }
-
 
 //##################################################################################################
 //#################################            EDITAR                           ####################
 //##################################################################################################
 
 var idSelected;
-function getRegistroClient(numID){
+function getRegistroAdmin(numID){
 
     idSelected = numID;
     $.ajax({
-       url:urlGeneral+"api/Client/"+numID,
+       url:urlGeneral+"api/Admin/"+numID,
        type:'GET',
        dataType:"JSON",
 
        success:function(respuesta){
-           //var items = respuesta.items;
            console.log(respuesta);
            $("#txtEmail").val(respuesta.email);
            $("#txtPassword").val(respuesta.password);
            $("#txtName").val(respuesta.name);
-           $("#txtAge").val(respuesta.age);
-           $("#btnAgregarClient").hide();
-           $("#btnGuardarEdicionClient").show();
+           $("#btnAgregarAdmin").hide();
+           $("#btnGuardarEdicionAdmin").show();
        },
        error:function(xhr,status){
            console.log(status);
@@ -194,29 +151,28 @@ function getRegistroClient(numID){
 
 }
 
-function guardarEdicionClient(){
+function guardarEdicionAdmin(){
        //Camputar datos del FrontEnd a una variable de tipo diccionario
        var datos = {
-           idClient:idSelected,
+           idAdmin:idSelected,
            email:$("#txtEmail").val(),
            password:$("#txtPassword").val(),
-           name:$("#txtName").val(),
-           age:$("#txtAge").val()
+           name:$("#txtName").val()
         }
        
        //Convertir lo que ingresemos en el FrontEnd a JSON
        let datosPeticion = JSON.stringify(datos);
    
        $.ajax({
-           url:urlGeneral+"api/Client/update",
+           url:urlGeneral+"api/Admin/update",
            data: datosPeticion,
            type:'PUT',
            contentType:"application/JSON",
 
            success:function(respuesta){
                console.log("Editado");
-               listarClient();
-               vaciarClient();
+               listarAdmin();
+               vaciarAdmin();
            },
            error:function(xhr,status){
                console.log(status);

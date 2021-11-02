@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADMINISTRADORES</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="JS/AdministratorScript.js"></script>
+    <script src="JS/AdminScript.js"></script>
 </head>
 <body>
     <div>
@@ -20,15 +20,16 @@
         <input type="text" id="txtName" placeholder="Name" maxlength="250">
         <br><input type="email" id="txtEmail" placeholder="email" maxlength="45">
         <br><input type="password" id="txtPassword" placeholder="password" maxlength="45">
-        <br><button onclick="agregarAdministrator()" id="btnAgregarAdministrator">AGREGAR</button>
-        <br><button onclick="guardarEdicionAdministrator()" id="btnGuardarEdicionAdministrator" style="display: none;">GUARDAR EDICION</button>
+        <br>
+        <br><button onclick="agregarAdmin()" id="btnAgregarAdmin">AGREGAR</button>
+        <br><button onclick="guardarEdicionAdmin()" id="btnGuardarEdicionAdmin" style="display: none;">GUARDAR EDICION</button>
     </div>
     <hr>
     <h2>Administradores registrados en la tienda</h2>
-    <div id="listadoAdministrator">
+    <div id="listadoAdmin">
     <script>
         window.onload=function(){
-            listarAdministrator();
+            listarAdmin();
         }
     </script>
     </div>

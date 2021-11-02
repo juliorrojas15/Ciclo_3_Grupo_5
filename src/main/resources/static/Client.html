@@ -22,11 +22,13 @@
         <br><input type="password" id="txtPassword" placeholder="password" maxlength="45">
         <br><input type="number" id="txtAge" placeholder="Age" min= "1" max="99" maxlength="2"
             onkeyup="if(parseInt(this.value)>99){ this.value = ''; return false; }">
+        <br>   
         <br><button onclick="agregarClient()" id="btnAgregarClient">AGREGAR</button>
         <br><button onclick="guardarEdicionClient()" id="btnGuardarEdicionClient" style="display: none;">GUARDAR EDICION</button>
     </div>
     <hr>
     <h2>Clientes registrados en la tienda</h2>
+    <h5>Si deseas eliminar un cliente no debe tener reservaciones ni mensajes activos</h5>
     <div id="listadoClient">
     <script>
         window.onload=function(){

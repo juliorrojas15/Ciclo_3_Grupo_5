@@ -24,12 +24,15 @@ function listarRespuestaMessage(items){
                         <th>Message</th>
                         <th>Client</th>
                         <th>Computer</th>
+                        <th clspan="2">Acciones</th> 
                     </tr>`;
     for(var i=0;i<items.length;i++){
         tblTabla+=`<tr>
                         <td>${items[i].messageText}</td>
                         <td>${items[i].client.name} de ${items[i].client.age} años</td>
                         <td>${items[i].computer.brand} - ${items[i].computer.name} - ${items[i].computer.year}</td>
+                        <td><button onclick="getRegistroMessage(${items[i].idMessage})">EDITAR</td>
+                        <td><button onclick="borrarMessage(${items[i].idMessage})">BORRAR</td>
                     </tr>
         `;
     }
@@ -115,6 +118,17 @@ function agregarMessage(){
     var idSelectedClient = $("#selectClient").val();
     var idSelectedComputer = $("#selectComputer").val();
 
+
+    if(idSelectedClient == null){
+        window.alert("Falta seleccionar un cliente");
+        return;
+    }
+    if(idSelectedComputer == null){
+        window.alert("Falta seleccionar un Computador");
+        return;
+    }
+
+
    //Camputar datos del FrontEnd a una variable de tipo diccionario
     var datos = {
         messageText:$("#txtMessage").val(),
@@ -152,6 +166,97 @@ function agregarMessage(){
 //##################################################################################################
 function vaciarMessage(){
     $("#txtMessage").val("");
+    $("#selectClient").val("");
+    $("#selectComputer").val("");
     $("#btnAgregarMessage").show();
     $("#btnGuardarEdicionMessage").hide();
+}
+
+//##################################################################################################
+//#################################            BORRAR                           ####################
+//##################################################################################################
+function borrarMessage(numID){
+
+    //Camputar datos del FrontEnd a una variable de tipo diccionario
+    var datos = {
+        id:numID
+    }
+
+        //Convertir lo que ingresemos en el FrontEnd a JSON
+    let datosPeticion = JSON.stringify(datos);
+
+    $.ajax({
+        url:urlGeneral+"api/Message/"+numID,
+        data: datosPeticion,
+        type:'DELETE',
+        contentType:"application/JSON",
+
+        success:function(respuesta){
+            console.log("Borrado");
+            listarMessage();
+        },
+        error:function(xhr,status){
+            console.log(status);
+        }
+    });
+}
+
+//##################################################################################################
+//#################################            EDITAR                           ####################
+//##################################################################################################
+
+var idSelected;
+function getRegistroMessage(numID){
+
+    idSelected = numID;
+    $.ajax({
+       url:urlGeneral+"api/Message/"+numID,
+       type:'GET',
+       dataType:"JSON",
+
+       success:function(respuesta){
+           console.log(respuesta);
+           $("#txtMessage").val(respuesta.messageText);
+           $("#selectClient").hide();//.val(respuesta.client.idClient);
+           $("#selectComputer").hide();//val(respuesta.computer.id);
+           $("#btnAgregarMessage").hide();
+           $("#btnGuardarEdicionMessage").show();
+       },
+       error:function(xhr,status){
+           console.log(status);
+       }
+   });
+
+}
+
+function guardarEdicionMessage(){
+       //Camputar datos del FrontEnd a una variable de tipo diccionario
+       var datos = {
+           idMessage:idSelected,
+           messageText:$("#txtMessage").val(),
+           client:{idClient: $("#selectClient").val()},
+           computer:{id: $("#selectComputer").val()}
+        }
+       
+       //Convertir lo que ingresemos en el FrontEnd a JSON
+       let datosPeticion = JSON.stringify(datos);
+       console.log(datosPeticion);
+   
+       $.ajax({
+           url:urlGeneral+"api/Message/update",
+           data: datosPeticion,
+           type:'PUT',
+           contentType:"application/JSON",
+
+           success:function(respuesta){
+               console.log("Editado");
+               $("#selectClient").show();
+               $("#selectComputer").show();
+               listarMessage();
+               vaciarMessage();
+           },
+           error:function(xhr,status){
+               console.log(status);
+           }
+       });
 }

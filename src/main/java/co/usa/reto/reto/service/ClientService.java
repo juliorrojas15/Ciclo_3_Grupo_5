@@ -38,4 +38,37 @@ public class ClientService {
 
         }
     }
+
+    public Client update (Client client){
+        
+        //Verificar si se ingresó un número de ID
+        if (client.getIdClient() != null){
+            Optional<Client> consulta = clientRepositorio.getClient(client.getIdClient());
+            if (!consulta.isEmpty()){
+                if (client.getName() != null){
+                    consulta.get().setName(client.getName());
+                }
+                if (client.getEmail() != null){
+                    consulta.get().setEmail(client.getEmail());
+                }
+                if (client.getPassword() != null){
+                    consulta.get().setPassword (client.getPassword());
+                }
+                if (client.getAge() != null){
+                    consulta.get().setAge (client.getAge());
+                }                
+                return clientRepositorio.save(consulta.get());
+            } 
+        }
+        return client;
+    }
+
+    public boolean deleteClient (int numId){
+        Optional<Client> consulta = clientRepositorio.getClient(numId);
+        if (!consulta.isEmpty()){
+            clientRepositorio.delete(consulta.get());
+            return true;
+        }
+        return false;
+    }
 }

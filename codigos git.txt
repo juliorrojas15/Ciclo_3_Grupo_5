@@ -71,8 +71,10 @@ Pasos para hacer el Repositorio  del GitHub a la máquina virtual:
 -ir a repositorio y copiar el link de la última versión
 -ir a la carpeta de las llaves
 -click derecho y GitBash here
--shh -i llave-privada.key opc@129.151.122.73
+-ssh -i llave-privada.key opc@129.151.122.73
 -ls
+-si se desea borrar los datos que ya están 
+	sudo rm -r <nombre del directorio>
 -git clone https://github.com/juliorrojas15/Ciclo_3_Grupo_5.git
 - si está en un branch
  git clone --branch master https://github.com/juliorrojas15/Ciclo_3_Grupo_5.git
