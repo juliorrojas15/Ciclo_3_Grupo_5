@@ -1,0 +1,61 @@
+body{
+    font-family: "roboto";
+
+}
+
+h1{
+    color:blue;
+    background-color: aquamarine;
+    border: 5px groove;
+    border-color: darkblue;
+    border-radius: 5px;
+    text-align: center;
+}
+h2{
+
+}
+h3{
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+th,td{
+    border: solid 1px black;
+    padding: auto;
+    
+    
+}
+th{
+    background-color: blue;
+    color: #eee;
+    text-align: center;
+}
+
+
+button{
+    font-size: 20px;
+    background-color: gray;
+    color: darkblue;
+    border: 10px;
+    border-radius: 4px;
+    border-color: darkblue;
+    padding: 5px;
+    
+}
+input{
+    font-size: 20px;
+    font-style: oblique;
+    border-color: blue;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+}
+select{
+    font-size: 20px;
+    border-color: blue;
+    border-radius: 4px;
+    padding: 5px;
+    
+}

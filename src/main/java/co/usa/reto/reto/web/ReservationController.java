@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import co.usa.reto.reto.model.Reservation;
+import co.usa.reto.reto.model.reporte.ContReservation;
+import co.usa.reto.reto.model.reporte.ContReservationStatus;
 import co.usa.reto.reto.service.ReservationService;
 
 @RestController
@@ -44,4 +46,22 @@ public class ReservationController {
     public boolean deleteReservation(@PathVariable("numId") int numId){
         return reservationService.deleteReservation(numId);
     }
+
+    @GetMapping("/report-status")
+    public ContReservationStatus getReservationStatus(){
+        return reservationService.getReservationStatus();
+    }
+
+    @GetMapping("/report-clients")
+    public List<ContReservation> getReservationTop(){
+        return reservationService.getReservartionTop();
+    }
+
+    @GetMapping("/report-dates/{date1}/{date2}")
+    public List<Reservation> getReservationDate(
+            @PathVariable("date1") String date1,@PathVariable("date2") String date2){
+        return reservationService.gerReservationByDate(date1,date2);
+    }
+
+
 }

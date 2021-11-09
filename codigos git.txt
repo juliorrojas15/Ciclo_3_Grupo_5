@@ -83,6 +83,7 @@ Pasos para hacer el Repositorio  del GitHub a la máquina virtual:
 -Esperar
 -ls
 -cd target
+-ls
 -sudo java -jar <archivo.jar>
 -Esperar
 -interrumpir con ctrl + c

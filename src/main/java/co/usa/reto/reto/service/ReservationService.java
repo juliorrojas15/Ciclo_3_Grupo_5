@@ -4,11 +4,18 @@
  * and open the template in the editor.
  */
 package co.usa.reto.reto.service;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import co.usa.reto.reto.model.Reservation;
+import co.usa.reto.reto.model.reporte.ContReservation;
+import co.usa.reto.reto.model.reporte.ContReservationStatus;
 import co.usa.reto.reto.repository.ReservationRepositorio;
 
 /**
@@ -49,7 +56,7 @@ public class ReservationService {
         //Verificar si el objeto es nuevo, de ser así guardar
 
         if(reservation.getIdReservation() == null){    //Si no viene con ID, entonces guardar como nuevo
-            reservation.setStatus("created");
+            //reservation.setStatus("created");
             return reservationRepositorio.save(reservation);
         }
         else{   //Si viene con ID, hay dos opciones, que exista o no
@@ -104,5 +111,45 @@ public class ReservationService {
         }
         return false;
     }
+
+    /**
+     * 
+     * @return
+     */
+    public List<ContReservation> getReservartionTop(){
+        return reservationRepositorio.getReservartionTop();
+    }
+
+    public ContReservationStatus getReservationStatus(){
+        List<Reservation> completed = reservationRepositorio.getReservationByStatus("completed");
+        List<Reservation> cancelled = reservationRepositorio.getReservationByStatus("cancelled");
+
+        ContReservationStatus contReservationStatus = new ContReservationStatus(completed.size(), cancelled.size());
+
+        return contReservationStatus;
+    }
+
+    public List<Reservation> gerReservationByDate(String date1,String date2){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate = new Date();
+        Date devolutionDate = new Date();
+
+        try {
+            startDate = format.parse(date1);
+            devolutionDate = format.parse(date2);
+        } catch (ParseException e) {
+            e.printStackTrace();    
+        }
+
+        if(startDate.before(devolutionDate)){
+            return reservationRepositorio.getReservationByDate(startDate, devolutionDate);
+        }
+        else{
+            return new ArrayList<>();
+        }
+        
+
+    }
+
 }
 

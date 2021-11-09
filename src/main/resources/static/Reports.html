@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REPORTES</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="JS/ReportsScript.js"></script>
+    <link rel="styleSheet" href="CSS/style.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div>
+        <h1>GENERAR INFORMES</h1>
+        
+        <a href="javascript:history.back()"> VOLVER AL MENÚ</a>    
+    </div>
+    <hr>
+    <div>
+        <h3>¿Qué reporte de reservas deseas generar?</h3>
+        <br><button onclick="reportStatus()" id="btnReportStatus">POR ESTADO</button>
+        <br><button onclick="reportClient()" id="btnReportClient">POR CLIENTE</button>
+        <br><button onclick="reportDates()" id="btnReportDates">POR FECHAS</button>
+        desde <input type="date"   id="txtDate1" placeholder="Date 1 yyyy-mm-dd">
+        hasta <input type="date"   id="txtDate2" placeholder="Date 2 yyyy-mm-dd">
+    </div>
+    <hr>
+    <h2>Reporte generado</h2>
+    <div id="listadoReports">
+    <script>
+    </script>
+    </div>
+</body>
+</html>

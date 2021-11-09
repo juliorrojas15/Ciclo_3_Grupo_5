@@ -19,7 +19,7 @@ function listarComputer(){
     });
 }
 function listarRespuestaComputer(items){
-    var tblTabla = `<table border="1">
+    var tblTabla = `<table>
                     <tr>
                         <th>Brand</th>
                         <th>Year</th>
